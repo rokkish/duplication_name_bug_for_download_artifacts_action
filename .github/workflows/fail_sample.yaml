@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  job:
+  job_v2:
     runs-on: [ubuntu-22.04]
     steps:
       - uses: actions/checkout@v2
@@ -13,6 +13,22 @@ jobs:
           name: sample # is same as already existing directory name
           path: upload/sample
       - uses: actions/download-artifact@v2
+        with:
+          name: sample # is same as already existing directory name
+      - name: show files exists
+        run: cat sample/sample
+        if: always()
+  job_v3:
+    if: always()
+    needs: job_v2
+    runs-on: [ubuntu-22.04]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/upload-artifact@v3
+        with:
+          name: sample # is same as already existing directory name
+          path: upload/sample
+      - uses: actions/download-artifact@v3
         with:
           name: sample # is same as already existing directory name
       - name: show files exists
