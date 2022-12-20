@@ -18,6 +18,19 @@ jobs:
       - name: show files exists
         run: cat sample/sample
         if: always()
+  job_v2_change_uploadname:
+    runs-on: [ubuntu-22.04]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/upload-artifact@v2
+        with:
+          name: sample_binary # is not same as already existing directory name
+          path: ./upload/sample
+      - uses: actions/download-artifact@v2
+        with:
+          name: sample_binary # is not same as already existing directory name
+      - name: check files exists
+        run: cat sample_binary/sample
   job_v3:
     if: always()
     needs: job_v2
