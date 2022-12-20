@@ -1,0 +1,20 @@
+name: fail_sample
+
+on:
+  push:
+
+jobs:
+  job:
+    runs-on: [ubuntu-22.04]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/upload-artifact@v2
+        with:
+          name: sample # is same as already existing directory name
+          path: sample/sample.txt
+      - uses: actions/download-artifact@v2
+        with:
+          name: sample # is same as already existing directory name
+      - name: show files exists
+        run: ls
+        if: always()
