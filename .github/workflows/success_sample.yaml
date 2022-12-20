@@ -11,10 +11,10 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: sample # is same as already existing directory name
-          path: sample/sample.txt
+          path: upload/sample
       - uses: actions/download-artifact@v2
         with:
           name: sample # is same as already existing directory name
           path: sample/sample # to avoid name duplication error
-      - name: show files exists
-        run: ls
+      - name: check files exists
+        run: cat sample/sample
